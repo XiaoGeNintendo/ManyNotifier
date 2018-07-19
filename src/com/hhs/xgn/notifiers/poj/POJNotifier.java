@@ -58,8 +58,9 @@ public class POJNotifier extends Thread {
 							System.out.println("Change "+ps.RunID);
 							mp.put(ps.RunID,ps);
 							DialogQueue.add(new POJWindow(ps.RunID,this));
-							load.add(ps.RunID);
+							
 						}
+						load.add(ps.RunID);
 					}
 					
 				}

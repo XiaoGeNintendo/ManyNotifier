@@ -58,8 +58,8 @@ public class AtcoderNotifier extends Thread {
 							}
 							System.out.println("Change "+ps.RunID);
 							mp.put(ps.RunID,ps);
-							load.add(ps.RunID);
 						}
+						load.add(ps.RunID);
 					}
 				}
 				

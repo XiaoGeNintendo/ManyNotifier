@@ -2,3 +2,4 @@ Codeforces=.+
 POJ=.+
 Atcoder=.+
 AtcoderContest=arc100
+FZU=.+

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hhs.xgn.notifiers.codeforces.CodeforcesNotifier;
+import com.hhs.xgn.notifiers.fzu.FZUNotifier;
 import com.hhs.xgn.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.xgn.notifiers.poj.POJNotifier;
 
@@ -51,6 +52,7 @@ class start{
 	}
 	
 	public void solve(){
+		
 		System.out.println("Reading config files");
 		loadLangFile();
 		
@@ -66,5 +68,10 @@ class start{
 			Thread t=new AtcoderNotifier(l.get("Atcoder"),l.get("AtcoderContest"));
 			t.start();
 		}
+		if(l.containsKey("FZU")){
+			Thread t=new FZUNotifier(l.get("FZU"));
+			t.start();
+		}
+		
 	}
 }

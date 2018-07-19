@@ -19,6 +19,7 @@ In each line of **user.txt** you need to input as the following format: `a=b` wh
 |Codeforces|Y|N|Y|Y|10|
 |POJ|Y|Y|Y|N|20|
 |Atcoder(1)|Y|N|Y|Y|20|
+|FZU|Y|Y|Y|N|15|
 
 OJ - The online judge we supported
 
@@ -39,3 +40,4 @@ Cnt - Update cound per second
 - Version 0.7 :Supports **Codeforces** now. Thanks for Mike for the wonderful Codeforces API.
 - Version 1.0 :Supports **Peking University Online Judge(POJ)** now and released on Github
 - Version 1.1 :Supports **Atcoder** now and move to XiaoGeNintendo's space.
+- Version 1.2 :Supports **Fuzhou University Online Judge(FZU)** now and fixed some bugs
