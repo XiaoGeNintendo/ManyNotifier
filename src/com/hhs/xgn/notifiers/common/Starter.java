@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.hhs.xgn.notifiers.codeforces.CodeforcesNotifier;
+import com.hhs.xgn.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.xgn.notifiers.poj.POJNotifier;
 
 public class Starter {
@@ -61,8 +62,8 @@ class start{
 			Thread t=new POJNotifier(l.get("POJ"));
 			t.start();
 		}
-		if(l.containsKey("HDU")){
-			Thread t=new HDUNotifier(l.get("HDU"));
+		if(l.containsKey("Atcoder") && l.containsKey("AtcoderContest")){
+			Thread t=new AtcoderNotifier(l.get("Atcoder"),l.get("AtcoderContest"));
 			t.start();
 		}
 	}
