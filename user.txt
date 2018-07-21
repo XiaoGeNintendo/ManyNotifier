@@ -7,3 +7,4 @@ MYSBZ=.+
 HRBUST=.+
 ZOJ=.+
 URAL=.+
+LUOGU=.+

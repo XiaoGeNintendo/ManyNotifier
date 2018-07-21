@@ -7,9 +7,12 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import com.hhs.xgn.notifiers.codeforces.CodeforcesNotifier;
 import com.hhs.xgn.notifiers.fzu.FZUNotifier;
 import com.hhs.xgn.notifiers.hrbust.HRBUSTNotifier;
+import com.hhs.xgn.notifiers.luogu.LuoguNotifier;
 import com.hhs.xgn.notifiers.mysbz.MYSBZNotifier;
 import com.hhs.xgn.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.xgn.notifiers.poj.POJNotifier;
@@ -91,6 +94,10 @@ class start{
 		if(l.containsKey("URAL")){
 			Thread t=new URALNotifier(l.get("URAL"));
 			t.start();
+		}
+		if(l.containsKey("LUOGU")){
+			JOptionPane.showMessageDialog(null, "Luogu Supporting hasn't finished!");
+			
 		}
 	}
 }

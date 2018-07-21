@@ -47,7 +47,7 @@ public class URALNotifier extends Thread {
 					throw new Exception("Cannot find status table content");
 				}
 				
-				System.out.println(tableContext);
+				//System.out.println(tableContext);
 				
 				Document d=Jsoup.parseBodyFragment(tableContext);
 				Element tbody=d.body().getElementsByTag("table").get(0).getElementsByTag("tbody").get(0);
