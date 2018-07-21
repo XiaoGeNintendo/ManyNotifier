@@ -20,6 +20,7 @@ In each line of **user.txt** you need to input as the following format: `a=b` wh
 |POJ|Y|Y|Y|N|20|
 |Atcoder(1)|Y|N|Y|Y|20|
 |FZU|Y|Y|Y|N|15|
+|MYSBZ|Y|Y|Y|N|20|
 
 OJ - The online judge we supported
 
@@ -41,3 +42,4 @@ Cnt - Update cound per second
 - Version 1.0 :Supports **Peking University Online Judge(POJ)** now and released on Github
 - Version 1.1 :Supports **Atcoder** now and move to XiaoGeNintendo's space.
 - Version 1.2 :Supports **Fuzhou University Online Judge(FZU)** now and fixed some bugs
+- Version 1.3 :Supports **Dashiye Online Judge(MYSBZ)** now!

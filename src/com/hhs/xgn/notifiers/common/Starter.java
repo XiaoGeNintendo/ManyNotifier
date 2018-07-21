@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.hhs.xgn.notifiers.codeforces.CodeforcesNotifier;
 import com.hhs.xgn.notifiers.fzu.FZUNotifier;
+import com.hhs.xgn.notifiers.mysbz.MYSBZNotifier;
 import com.hhs.xgn.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.xgn.notifiers.poj.POJNotifier;
 
@@ -72,6 +73,9 @@ class start{
 			Thread t=new FZUNotifier(l.get("FZU"));
 			t.start();
 		}
-		
+		if(l.containsKey("MYSBZ")){
+			Thread t=new MYSBZNotifier(l.get("MYSBZ"));
+			t.start();
+		}
 	}
 }
