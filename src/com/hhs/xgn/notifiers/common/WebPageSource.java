@@ -38,7 +38,7 @@ public class WebPageSource {
 
 				// 得到输入流，即获得了网页的内容
 
-				reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "GBK"));
+				reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream(), "UTF-8"));
 				String ss = "";
 
 				while ((line = reader.readLine()) != null) {

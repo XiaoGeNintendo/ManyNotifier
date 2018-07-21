@@ -13,6 +13,7 @@ import com.hhs.xgn.notifiers.hrbust.HRBUSTNotifier;
 import com.hhs.xgn.notifiers.mysbz.MYSBZNotifier;
 import com.hhs.xgn.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.xgn.notifiers.poj.POJNotifier;
+import com.hhs.xgn.notifiers.zoj.ZOJNotifier;
 
 public class Starter {
 
@@ -80,6 +81,10 @@ class start{
 		}
 		if(l.containsKey("HRBUST")){
 			Thread t=new HRBUSTNotifier(l.get("HRBUST"));
+			t.start();
+		}
+		if(l.containsKey("ZOJ")){
+			Thread t=new ZOJNotifier(l.get("ZOJ"));
 			t.start();
 		}
 	}
