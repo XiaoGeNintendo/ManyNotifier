@@ -1,4 +1,4 @@
-package com.hhs.xgn.notifiers.mysbz;
+package com.hhs.xgn.notifiers.hrbust;
 
 import java.util.*;
 
@@ -11,18 +11,18 @@ import com.hhs.xgn.notifiers.common.WebPageSource;
 import com.hhs.xgn.notifiers.poj.POJWindow;
 
 /**
- * Dashiye Online Judge Submission Notifier Main 
+ * Hrbust Online Judge Submission Notifier Main 
  * @author XGN
  *
  */
-public class MYSBZNotifier extends Thread {
+public class HRBUSTNotifier extends Thread {
 	String regex;
-	public MYSBZNotifier(String string) {
+	public HRBUSTNotifier(String string) {
 		regex=string;
-		System.out.println("[MYSBZ]start with regex="+string);
+		System.out.println("[HRBUST]start with regex="+string);
 	}
 	
-	Map<Integer,MYSBZSubmission> mp=new HashMap<Integer,MYSBZSubmission>();
+	Map<Integer,HRBUSTSubmission> mp=new HashMap<Integer,HRBUSTSubmission>();
 	Set<Integer> load=new HashSet<Integer>();
 	
 	public void run(){
@@ -32,10 +32,10 @@ public class MYSBZNotifier extends Thread {
 				
 				load.clear();
 				
-				System.out.println("[MYSBZ]Checking MYSBZ Status Page");
+				System.out.println("[HRBUST]Checking HRBUST Status Page");
 				
-				String s=WebPageSource.get("https://www.lydsy.com/JudgeOnline/status.php");
-				int index=s.indexOf("<table align=center>");
+				String s=WebPageSource.get("http://acm.hrbust.edu.cn/index.php?m=Status&a=showStatus");
+				int index=s.indexOf("<table class=\"ojlist\" width=\"95%\">");
 				int end=s.indexOf("</table>",index);
 				if(index==-1 || end==-1){
 					throw new Exception("Cannot find status table beginning");
@@ -56,7 +56,7 @@ public class MYSBZNotifier extends Thread {
 						first=false;
 						continue;
 					}
-					MYSBZSubmission ps=new MYSBZSubmission(tr);
+					HRBUSTSubmission ps=new HRBUSTSubmission(tr);
 					//System.out.println(ps);
 					
 
@@ -64,7 +64,7 @@ public class MYSBZNotifier extends Thread {
 						if(!ps.equals(mp.get(ps.RunID))){
 							System.out.println("Change "+ps.RunID);
 							mp.put(ps.RunID,ps);
-							DialogQueue.add(new MYSBZWindow(ps.RunID,this));
+							DialogQueue.add(new HRBUSTWindow(ps.RunID,this));
 							
 						}
 						load.add(ps.RunID);
