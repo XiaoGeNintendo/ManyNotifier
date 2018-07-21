@@ -23,6 +23,7 @@ In each line of **user.txt** you need to input as the following format: `a=b` wh
 |MYSBZ|Y|Y|Y|N|20|
 |HRBUST|Y|Y|Y|N|30|
 |ZOJ(2)|Y|Y|Y|N|15|
+|URAL|Y|N|Y|Y|10|
 
 OJ - The online judge we supported
 
@@ -48,3 +49,4 @@ Cnt - The submissions we update per second
 - Version 1.3 :Supports **Dashiye Online Judge(MYSBZ)** now!
 - Version 1.4 :Supports **Hrbust Online Judge(HRBUST)** now!
 - Version 1.5 :Supports **Zhejiang University Online Judge(ZOJ)** now and fixed encoder to UTF-8!
+- Version 1.6 :Supports **Timus Online Judge(URAL)** now!

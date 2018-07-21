@@ -6,3 +6,4 @@ FZU=.+
 MYSBZ=.+
 HRBUST=.+
 ZOJ=.+
+URAL=.+
