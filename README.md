@@ -20,7 +20,7 @@ In each line of **user.txt** you need to input as the following format: `a=b` wh
 |POJ|Y|Y|Y|N|20|
 |Atcoder(1)|Y|N|Y|Y|20|
 |FZU|Y|Y|Y|N|15|
-|MYSBZ|Y|Y|Y|N|20|
+|HYSBZ(3)|Y|Y|Y|N|20|
 |HRBUST|Y|Y|Y|N|30|
 |ZOJ(2)|Y|Y|Y|N|15|
 |URAL|Y|N|Y|Y|10|
@@ -40,6 +40,7 @@ Cnt - The submissions we update per second
 ## Notice
 1. You need two lines in "user.txt" one is "Atcoder" to specialize the user regex and the other is "AtcoderContest" for the contests you are going to watch. The contest name must be the **short name** of Atcoder contests, for examples AtcoderGrandContest001 should be written as agc001. For example, Atcoder Regular Contest 100's domain is : `https://beta.atcoder.jp/contests/arc100/` then you should input `arc100` which is after `contests`.("AtcoderContest=arc100"). **Atcoder Notifier  doesn't work during contests (will give you 404)** 
 2. ZOJ supports Chinese name.
+3. HYSBZ in program is called "MYSBZ". This is a typo, sorry.
 
 # Changelog
 - Version 0.7 :Supports **Codeforces** now. Thanks for Mike for the wonderful Codeforces API.
