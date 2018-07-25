@@ -52,3 +52,4 @@ Cnt - The submissions we update per second
 - Version 1.5 :Supports **Zhejiang University Online Judge(ZOJ)** now and fixed encoder to UTF-8!
 - Version 1.6 :Supports **Timus Online Judge(URAL)** now!
 - Version 1.7 :Deleted some debug information.
+- Version 1.8 :Fixed typo and updates OJ project
