@@ -1,23 +1,10 @@
 package com.hhs.xgn.notifiers.atcoder;
 
-
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.URI;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
 
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.MovingWindow;
@@ -35,92 +22,21 @@ public class AtcoderWindow extends MovingWindow {
 
 	AtcoderWindow self = this;
 
-	JLabel user, pid, sta, tc,sid;
-
 	AtcoderNotifier cn;
-	
-	@Override
-	public void setId(int nid) {
-		this.id=nid;
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(this.getGraphicsConfiguration());
-		int x = (int) (dim.getWidth() - 320 - 3);
-		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
-		this.setBounds(x, y, 320, 30);
-		
-	}
-	public AtcoderWindow(String subId,String contest,AtcoderNotifier cn) {
-		this.subId=subId;
-		
-		this.cn=cn;
-		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 4));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("XiaoGeNintendo");
-		sid=new JLabel("0");
-		pid = new JLabel("1000");
-		sta = new JLabel("Compiling...");
-		tc=new JLabel("OJ:Atcoder");
-		tc.setToolTipText("Atcoder "+contest);
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sid.setFont(new Font("Consolas", Font.PLAIN, 10));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.PLAIN, 15));
 
-		sid.addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				if(e.getButton()==2){
-					Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(subId), null);
-				}
-			}
-		});
-		
-		
-		this.add(user);
-		add(pid);
-		add(sta);
-		add(tc);
+	public AtcoderWindow(String subId, String contest, AtcoderNotifier cn) {
+		super(" ", " ", "WJ", "", "AtCoder", "AtCoder");
 
-		this.setUndecorated(true);
-		this.setVisible(true);
+		this.subId = subId;
+
+		this.cn = cn;
 
 		Thread t = new Thread() {
 			public void run() {
 				while (true) {
 					update();
-					if (sta.getText().contains("/") == false && sta.getText().contains("WJ")==false && sta.getText().contains("??") == false) {
+					if (sta.getText().contains("/") == false && sta.getText().contains("WJ") == false
+							&& sta.getText().contains("??") == false) {
 						break;
 					}
 
@@ -134,7 +50,6 @@ public class AtcoderWindow extends MovingWindow {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -145,25 +60,45 @@ public class AtcoderWindow extends MovingWindow {
 
 		t.start();
 	}
-	
+
 	void update() {
 		AtcoderSubmission f = cn.mp.get(subId);
-		//System.out.println("Getting " + subId + " from " + f);
+		
 		if (f == null) {
 			user.setText("??");
 			pid.setText("??");
-			sid.setText("??");
-			//tc.setText("??");
+			tc.setText("??");
 			sta.setText("OOS");
 			sta.setToolTipText("Out of sync");
 			return;
 		}
+		
 		user.setText(f.User);
 		user.setToolTipText(f.User);
 		
-		pid.setText(""+f.Task);
-		pid.setToolTipText("ProbID:"+pid.getText());
+		tc.setToolTipText("RunID:"+f.RunID);
+		String[] tmp=f.RunID.split("/");
+		tc.setText(tmp[tmp.length-1]);
+		
+		pid.setText("" + f.Task);
+		pid.setToolTipText("ProbID:" + pid.getText());
+		
 		StatusCheck(f.Status);
+		
+		tc.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection("https://beta.atcoder.jp"+cn.mp.get(subId).RunID), null);
+			}
+		});
 	}
 
 	void StatusCheck(String v) {
@@ -201,6 +136,6 @@ public class AtcoderWindow extends MovingWindow {
 			sta.setForeground(Color.black);
 			return;
 		}
-		
+
 	}
 }

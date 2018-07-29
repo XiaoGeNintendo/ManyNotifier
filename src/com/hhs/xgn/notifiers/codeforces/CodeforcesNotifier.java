@@ -63,7 +63,7 @@ public class CodeforcesNotifier extends Thread {
 							if(!fs.equals(mp.get(fs.id))){
 								mp.put(fs.id, fs);
 								
-								DialogQueue.add(new CodeforcesWindow(fs.id,name,this));
+								DialogQueue.add(new CodeforcesWindow(name,fs.id,this));
 							}
 						}
 						

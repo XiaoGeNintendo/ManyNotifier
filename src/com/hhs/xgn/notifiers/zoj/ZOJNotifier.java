@@ -8,7 +8,6 @@ import org.jsoup.nodes.Element;
 
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.WebPageSource;
-import com.hhs.xgn.notifiers.poj.POJWindow;
 
 /**
  * Zhejiang University Online Judge Submission Notifier Main 

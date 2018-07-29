@@ -11,8 +11,6 @@ import org.jsoup.nodes.Element;
 
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.WebPageSource;
-import com.hhs.xgn.notifiers.poj.POJSubmission;
-import com.hhs.xgn.notifiers.poj.POJWindow;
 
 
 public class AtcoderNotifier extends Thread {

@@ -1,26 +1,12 @@
 package com.hhs.xgn.notifiers.codeforces;
 
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URI;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.MovingWindow;
 
 public class CodeforcesWindow extends MovingWindow {
 
-	/**
+	/**etText*()
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -31,56 +17,20 @@ public class CodeforcesWindow extends MovingWindow {
 	String bcf;
 
 	CodeforcesWindow self = this;
-
-	JLabel user, pid, sta, tc,oj;
-
+	FullSubmission f;
 	String handle;
 
 	CodeforcesNotifier cn;
 	
-	@Override
-	public void setId(int nid) {
-		this.id=nid;
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(this.getGraphicsConfiguration());
-		int x = (int) (dim.getWidth() - 320 - 3);
-		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
-		this.setBounds(x, y, 320, 30);
+	public CodeforcesWindow(String handle,int subId,CodeforcesNotifier cn) {
+		super(handle," ","WJ","T1","CF","CodeForces");
 		
-	}
-	public CodeforcesWindow(int subId, String handle,CodeforcesNotifier cn) {
+		
 		this.subId=subId;
 		
 		this.handle = handle;
 		this.cn=cn;
 		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 5));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("gwq2017");
-		pid = new JLabel("1A");
-		sta = new JLabel("WJ");
-		tc = new JLabel("T1");
-		oj=new JLabel("OJ:CF");
-		oj.setToolTipText("Codeforces");
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.ITALIC, 15));
-		oj.setFont(new Font("Consolas", Font.PLAIN, 15));
-
-		this.add(user);
-		add(pid);
-		add(sta);
-		add(tc);
-		add(oj);
-		
-		this.setUndecorated(true);
-		this.setVisible(true);
-
 		Thread t = new Thread() {
 			public void run() {
 				while (true) {
@@ -99,7 +49,6 @@ public class CodeforcesWindow extends MovingWindow {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -112,7 +61,7 @@ public class CodeforcesWindow extends MovingWindow {
 	}
 	
 	void update() {
-		FullSubmission f = cn.mp.get(subId);
+		f = cn.mp.get(subId);
 		//System.out.println("Getting " + subId + " from " + f);
 		if (f == null) {
 			user.setText("??");
@@ -131,7 +80,7 @@ public class CodeforcesWindow extends MovingWindow {
 		bci = f.problem.contestId;
 		bcf = f.problem.index;
 
-		tc.setText("Test#" + (f.passedTestCount + 1));
+		tc.setText("T" + (f.passedTestCount + 1));
 		tc.setToolTipText(tc.getText());
 		
 		StatusCheck(f.verdict);

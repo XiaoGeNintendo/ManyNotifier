@@ -2,22 +2,9 @@ package com.hhs.xgn.notifiers.mysbz;
 
 
 import java.awt.Color;
-import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URI;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
-
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.MovingWindow;
 
@@ -35,8 +22,6 @@ public class MYSBZWindow extends MovingWindow {
 
 	MYSBZWindow self = this;
 
-	JLabel user, pid, sta, tc,sid;
-
 	MYSBZNotifier cn;
 	
 	@Override
@@ -50,41 +35,22 @@ public class MYSBZWindow extends MovingWindow {
 		
 	}
 	public MYSBZWindow(int subId,MYSBZNotifier cn) {
-		this.subId=subId;
-		
-		this.cn=cn;
-		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 5));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("XiaoGeNintendo");
-		sid=new JLabel("0");
-		pid = new JLabel("1000");
-		sta = new JLabel("Compiling...");
-		tc=new JLabel("OJ:MYSBZ");
-		tc.setToolTipText("Dashiye Online Judge");
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sid.setFont(new Font("Consolas", Font.PLAIN, 10));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.PLAIN, 15));
-
-		this.add(user);
-		add(sid);
-		add(pid);
-		add(sta);
-		add(tc);
-
-		this.setUndecorated(true);
-		this.setVisible(true);
+		super(" ","WJ"," "," ","MYSBZ","Dashiye Online Judge");
 
 		Thread t = new Thread() {
 			public void run() {
 				while (true) {
-					update();
+					try{
+						update();
+					}
+					catch(NullPointerException e) {
+						user.setText("??");
+						pid.setText("??");
+						tc.setText("??");
+						sta.setText("OOS");
+						sta.setToolTipText("Out of sync");
+					}
+					
 					if (sta.getText().equals("WJ") == false && sta.getText().equals("??") == false) {
 						break;
 					}
@@ -99,7 +65,6 @@ public class MYSBZWindow extends MovingWindow {
 				try {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -113,12 +78,11 @@ public class MYSBZWindow extends MovingWindow {
 	
 	void update() {
 		MYSBZSubmission f = cn.mp.get(subId);
-		//System.out.println("Getting " + subId + " from " + f);
+		
 		if (f == null) {
 			user.setText("??");
 			pid.setText("??");
-			sid.setText("??");
-			//tc.setText("??");
+			tc.setText("??");
 			sta.setText("OOS");
 			sta.setToolTipText("Out of sync");
 			return;
@@ -129,8 +93,8 @@ public class MYSBZWindow extends MovingWindow {
 		pid.setText(""+f.PID);
 		pid.setToolTipText("ProbID:"+pid.getText());
 		
-		sid.setText(""+f.RunID);
-		sid.setToolTipText("RunID:"+sid.getText());
+		tc.setText(""+f.RunID);
+		tc.setToolTipText("RunID:"+tc.getText());
 		StatusCheck(f.Result);
 	}
 

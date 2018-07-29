@@ -2,32 +2,17 @@ package com.hhs.xgn.notifiers.poj;
 
 
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URI;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import org.omg.PortableServer.SERVANT_RETENTION_POLICY_ID;
-
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.MovingWindow;
 
-public class POJWindow extends MovingWindow {
+public class POJWindow extends MovingWindow{
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	int subId;
 
 	int bci;
@@ -35,52 +20,15 @@ public class POJWindow extends MovingWindow {
 
 	POJWindow self = this;
 
-	JLabel user, pid, sta, tc,sid;
-
 	POJNotifier cn;
 	
-	@Override
-	public void setId(int nid) {
-		this.id=nid;
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(this.getGraphicsConfiguration());
-		int x = (int) (dim.getWidth() - 320 - 3);
-		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
-		this.setBounds(x, y, 320, 30);
-		
-	}
 	public POJWindow(int subId,POJNotifier cn) {
+		super(" "," ","WJ"," ","POJ","Peking University Online Judge");
+		
 		this.subId=subId;
 		
 		this.cn=cn;
 		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 5));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("XiaoGeNintendo");
-		sid=new JLabel("0");
-		pid = new JLabel("1000");
-		sta = new JLabel("Compiling...");
-		tc=new JLabel("OJ:POJ");
-		tc.setToolTipText("Peking University Online Judge");
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sid.setFont(new Font("Consolas", Font.PLAIN, 10));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.PLAIN, 15));
-
-		this.add(user);
-		add(sid);
-		add(pid);
-		add(sta);
-		add(tc);
-
-		this.setUndecorated(true);
-		this.setVisible(true);
-
 		Thread t = new Thread() {
 			public void run() {
 				while (true) {
@@ -117,7 +65,7 @@ public class POJWindow extends MovingWindow {
 		if (f == null) {
 			user.setText("??");
 			pid.setText("??");
-			sid.setText("??");
+			tc.setText("??");
 			//tc.setText("??");
 			sta.setText("OOS");
 			sta.setToolTipText("Out of sync");
@@ -129,8 +77,8 @@ public class POJWindow extends MovingWindow {
 		pid.setText(""+f.Problem);
 		pid.setToolTipText("ProbID:"+pid.getText());
 		
-		sid.setText(""+f.RunID);
-		sid.setToolTipText("RunID:"+sid.getText());
+		tc.setText(""+f.RunID);
+		tc.setToolTipText("RunID:"+tc.getText());
 		StatusCheck(f.Result);
 	}
 

@@ -2,21 +2,6 @@ package com.hhs.xgn.notifiers.ural;
 
 
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URI;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-
 import com.hhs.xgn.notifiers.common.DialogQueue;
 import com.hhs.xgn.notifiers.common.MovingWindow;
 
@@ -34,50 +19,10 @@ public class URALWindow extends MovingWindow {
 
 	URALWindow self = this;
 
-	JLabel user, pid, sta, tc,sid;
-
 	URALNotifier cn;
 	
-	@Override
-	public void setId(int nid) {
-		this.id=nid;
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(this.getGraphicsConfiguration());
-		int x = (int) (dim.getWidth() - 320 - 3);
-		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
-		this.setBounds(x, y, 320, 30);
-		
-	}
 	public URALWindow(int subId,URALNotifier cn) {
-		this.subId=subId;
-		
-		this.cn=cn;
-		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 5));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("XiaoGeNintendo");
-		pid = new JLabel("1000");
-		sta = new JLabel("Compiling...");
-		tc=new JLabel("Test#0");
-		sid=new JLabel("OJ:URAL");
-		sid.setToolTipText("Timus Online Judge");
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sid.setFont(new Font("Consolas", Font.PLAIN, 10));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.PLAIN, 15));
-
-		this.add(user);
-		add(pid);
-		add(sta);
-		add(tc);
-		add(sid);
-		this.setUndecorated(true);
-		this.setVisible(true);
+		super(" ","WJ"," "," ","URAL","Timus Online Judge");
 
 		Thread t = new Thread() {
 			public void run() {
@@ -111,12 +56,11 @@ public class URALWindow extends MovingWindow {
 	
 	void update() {
 		URALSubmission f = cn.mp.get(subId);
-		//System.out.println("Getting " + subId + " from " + f);
+		
 		if (f == null) {
 			user.setText("??");
 			pid.setText("??");
-			sid.setText("??");
-			//tc.setText("??");
+			tc.setText("??");
 			sta.setText("OOS");
 			sta.setToolTipText("Out of sync");
 			return;
@@ -132,7 +76,7 @@ public class URALWindow extends MovingWindow {
 			tc.setToolTipText("(No test case)");
 		}else{
 			tc.setText("Test#"+f.TestNo);
-			tc.setToolTipText("Test#:"+sid.getText());
+			tc.setToolTipText("Test#:"+tc.getText());
 		}
 		
 		

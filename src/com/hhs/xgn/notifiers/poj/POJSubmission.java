@@ -1,8 +1,5 @@
 package com.hhs.xgn.notifiers.poj;
 
-import java.io.ByteArrayInputStream;
-import java.util.Iterator;
-
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.*;
 import org.jsoup.select.Elements;
