@@ -19,38 +19,46 @@ import com.hhs.xgn.notifiers.poj.POJNotifier;
 import com.hhs.xgn.notifiers.ural.URALNotifier;
 import com.hhs.xgn.notifiers.zoj.ZOJNotifier;
 
+/**
+ * 
+ * Starter of the whole program.<br>
+ * <br>
+ * <i>Should we stop the threads more safely?</i>
+ * 
+ * @author XGN,Zzzyt
+ *
+ */
 public class Starter {
 
-	
-	public static void main(String[] args) {
-		start s=new start();
-		s.solve();
-	}
-
-}
-
-class start{
-	
-	public Map<String,String> l=new HashMap<String,String>();
+	public static Map<String,String> config=new HashMap<String,String>();
+	public static int interval=1000;
 	
 	/**
-	 * Load a single config file
-	 * @param path
-	 * @throws  
+	 * Load a single config file.<br>
+	 * 
+	 * @param path Path of the file
 	 */
-	private void loadLangFile(){
+	private static void loadConfigFile(){
 		try{
 			File f=new File("user.txt");
+			
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 			String s;
-			while((s=br.readLine())!=null){
-				String[] s2=s.split("=");
-				l.put(s2[0], s2[1]);
-			}
 			
 			String fg=f.getName();
-			
 			System.out.println("Read config file:"+fg);
+			
+			for(int i=0;(s=br.readLine())!=null;i++){
+				String[] s2=s.split("=");
+				if(s2.length==2) {
+					config.put(s2[0], s2[1]);
+				}
+				else {
+					//Wrong config format
+					System.out.println("[STARTER][WARNING]Wrong config format at line "+i);
+					System.out.println("[STARTER]Ignored this line of config");
+				}
+			}
 			
 			br.close();
 		}catch(Exception e){
@@ -58,46 +66,67 @@ class start{
 		}
 	}
 	
-	public void solve(){
+	/**
+	 * Entrance function of the whole program.<br>
+	 * Starts all the notifier threads.<br>
+	 * 
+	 * @param args System parameter
+	 */
+	public static void main(String[] args) {
+		System.out.println("[STARTER]Good luck in the life of OI! =) ---from Zzzyt");
+		System.out.println("===============Program Started===============");
 		
-		System.out.println("Reading config files");
-		loadLangFile();
+		System.out.println("[STARTER]Reading config files");
+		loadConfigFile();
 		
-		if(l.containsKey("Codeforces")){
-			Thread t=new CodeforcesNotifier(l.get("Codeforces"));
+		if(config.containsKey("Interval")) {
+			interval=Integer.parseInt(config.get("Interval"));
+			if(interval<0) {
+				System.out.println("[STARTER][WARNING]Wrong interval "+interval+":too small");
+				System.out.println("[STARTER]Interval is set to default(1000)");
+				interval=1000;
+			}
+		}
+		
+		if(config.containsKey("Codeforces")){
+			Thread t=new CodeforcesNotifier(config.get("Codeforces"));
 			t.start();
 		}
-		if(l.containsKey("POJ")){
-			Thread t=new POJNotifier(l.get("POJ"));
+		/*
+		if(config.containsKey("POJ")){
+			Thread t=new POJNotifier(config.get("POJ"));
 			t.start();
 		}
-		if(l.containsKey("Atcoder") && l.containsKey("AtcoderContest")){
-			Thread t=new AtcoderNotifier(l.get("Atcoder"),l.get("AtcoderContest"));
+		if(config.containsKey("Atcoder") && config.containsKey("AtcoderContest")){
+			Thread t=new AtcoderNotifier(config.get("Atcoder"),config.get("AtcoderContest"));
 			t.start();
 		}
-		if(l.containsKey("FZU")){
-			Thread t=new FZUNotifier(l.get("FZU"));
+		if(config.containsKey("FZU")){
+			Thread t=new FZUNotifier(config.get("FZU"));
 			t.start();
 		}
-		if(l.containsKey("MYSBZ")){
-			Thread t=new MYSBZNotifier(l.get("MYSBZ"));
+		if(config.containsKey("MYSBZ")){
+			Thread t=new MYSBZNotifier(config.get("MYSBZ"));
 			t.start();
 		}
-		if(l.containsKey("HRBUST")){
-			Thread t=new HRBUSTNotifier(l.get("HRBUST"));
+		if(config.containsKey("HRBUST")){
+			Thread t=new HRBUSTNotifier(config.get("HRBUST"));
 			t.start();
 		}
-		if(l.containsKey("ZOJ")){
-			Thread t=new ZOJNotifier(l.get("ZOJ"));
+		if(config.containsKey("ZOJ")){
+			Thread t=new ZOJNotifier(config.get("ZOJ"));
 			t.start();
 		}
-		if(l.containsKey("URAL")){
-			Thread t=new URALNotifier(l.get("URAL"));
+		if(config.containsKey("URAL")){
+			Thread t=new URALNotifier(config.get("URAL"));
 			t.start();
 		}
-		if(l.containsKey("LUOGU")){
+		if(config.containsKey("LUOGU")){
 			JOptionPane.showMessageDialog(null, "Luogu Supporting hasn't finished!");
-			
 		}
+		*/
+		
+		DialogQueue.run();
 	}
+
 }

@@ -77,4 +77,13 @@ public class MovingWindow extends JDialog {
 		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
 		this.setBounds(x, y, 340, 30);
 	}
+	
+	public void update() {
+		
+	}
+	
+	@Override
+	public String toString() {
+		return ("[Id="+id+",Username="+user.getText()+",Problem="+pid.getText()+",Status="+sta.getText()+",Testcase/SubmissionId="+tc.getText()+",OJ="+oj.getText()+"]");
+	}
 }

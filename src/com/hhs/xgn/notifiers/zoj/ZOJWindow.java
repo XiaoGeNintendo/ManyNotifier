@@ -54,7 +54,8 @@ public class ZOJWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		ZOJSubmission f = cn.mp.get(subId);
 
 		if (f == null) {

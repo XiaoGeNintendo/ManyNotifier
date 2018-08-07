@@ -31,6 +31,7 @@ public class CodeforcesWindow extends MovingWindow {
 		this.handle = handle;
 		this.cn=cn;
 		
+		/*
 		Thread t = new Thread() {
 			public void run() {
 				while (true) {
@@ -58,9 +59,11 @@ public class CodeforcesWindow extends MovingWindow {
 		};
 
 		t.start();
+		*/
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		f = cn.mp.get(subId);
 		//System.out.println("Getting " + subId + " from " + f);
 		if (f == null) {
@@ -136,7 +139,9 @@ public class CodeforcesWindow extends MovingWindow {
 			return;
 		}
 
-		sta.setText("Other");
+		//I tried to keep serious but there is only a small space of 3 chars to display...
+		//So I choosed "IDK" :P
+		sta.setText("IDK");
 		sta.setToolTipText(v);
 
 	}

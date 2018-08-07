@@ -76,7 +76,8 @@ public class MYSBZWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		MYSBZSubmission f = cn.mp.get(subId);
 		
 		if (f == null) {

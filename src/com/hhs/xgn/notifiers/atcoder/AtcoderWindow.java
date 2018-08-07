@@ -61,7 +61,8 @@ public class AtcoderWindow extends MovingWindow {
 		t.start();
 	}
 
-	void update() {
+	@Override
+	public void update() {
 		AtcoderSubmission f = cn.mp.get(subId);
 		
 		if (f == null) {

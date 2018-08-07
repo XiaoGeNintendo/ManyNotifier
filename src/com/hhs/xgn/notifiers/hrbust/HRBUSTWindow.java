@@ -54,7 +54,8 @@ public class HRBUSTWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		HRBUSTSubmission f = cn.mp.get(subId);
 		
 		if (f == null) {

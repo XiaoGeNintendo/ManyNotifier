@@ -59,7 +59,8 @@ public class POJWindow extends MovingWindow{
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		POJSubmission f = cn.mp.get(subId);
 		//System.out.println("Getting " + subId + " from " + f);
 		if (f == null) {

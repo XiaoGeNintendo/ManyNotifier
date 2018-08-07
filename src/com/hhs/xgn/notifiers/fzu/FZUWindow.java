@@ -54,7 +54,8 @@ public class FZUWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		FZUSubmission f = cn.mp.get(subId);
 		
 		if (f == null) {

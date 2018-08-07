@@ -7,33 +7,34 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.hhs.xgn.notifiers.common.DialogQueue;
+import com.hhs.xgn.notifiers.common.Starter;
 import com.hhs.xgn.notifiers.common.WebPageSource;
 
 public class CodeforcesNotifier extends Thread {
 	String regex;
+	
 	public CodeforcesNotifier(String reg){
 		System.out.println("[CF] start with regex="+reg);
 		this.regex=reg;
 	}
 	
 	public Map<Integer,FullSubmission> mp=new HashMap<Integer,FullSubmission>();
-	
 	public Set<Integer> load=new HashSet<Integer>();
 	
-	final int td=1000;
 	final int cnt=10;
 	
 	public void run(){
 		while(true){
 			try{
-				Thread.sleep(td);
+				Thread.sleep(Starter.interval);
 				
 				load.clear();
 				System.out.println("[CF]Codeforces API Checking");
-				//Get 
+				
+				//Get source
 				String api=WebPageSource.get("http://codeforces.com/api/problemset.recentStatus?count="+cnt);
 				
-				//Get json Parser
+				//Get json parser
 				JsonParser jp=new JsonParser();
 				JsonObject jo=jp.parse(api).getAsJsonObject();
 				

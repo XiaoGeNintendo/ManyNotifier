@@ -109,7 +109,8 @@ public class LuoguWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		LuoguSubmission f = cn.mp.get(subId);
 		//System.out.println("Getting " + subId + " from " + f);
 		if (f == null) {

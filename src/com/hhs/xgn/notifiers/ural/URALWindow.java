@@ -54,7 +54,8 @@ public class URALWindow extends MovingWindow {
 		t.start();
 	}
 	
-	void update() {
+	@Override
+	public void update() {
 		URALSubmission f = cn.mp.get(subId);
 		
 		if (f == null) {
