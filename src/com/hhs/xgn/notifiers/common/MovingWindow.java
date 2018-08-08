@@ -9,6 +9,8 @@ import java.awt.Toolkit;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.ToolTipManager;
 
 /**
  * You should not construct the window with ID because the {@link DialogQueue}
@@ -17,7 +19,7 @@ import javax.swing.JLabel;
  * @author XGN
  *
  */
-public class MovingWindow extends JDialog {
+public class MovingWindow extends JDialog{
 
 	/**
 	 * 
@@ -32,7 +34,7 @@ public class MovingWindow extends JDialog {
 	}
 
 	public MovingWindow(String HANDLE, String PROBLEM, String STATUS, String TESTCASE, String OJ, String FULLOJ) {
-		this.setTitle("Moving Window");
+		this.setName("Moving Window");
 		this.setAlwaysOnTop(true);
 		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
 
@@ -64,6 +66,11 @@ public class MovingWindow extends JDialog {
 		add(tc);
 		add(oj);
 
+		
+		if(Starter.doNotGetFocus) {
+			this.setFocusableWindowState(false);
+			this.setFocusable(false);
+		}
 		this.setUndecorated(true);
 		this.setVisible(true);
 	}

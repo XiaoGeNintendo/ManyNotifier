@@ -76,7 +76,6 @@ public class LuoguWindow extends MovingWindow {
 		add(sta);
 		add(tc);
 		add(sid);
-		this.setUndecorated(true);
 		this.setVisible(true);
 
 		Thread t = new Thread() {

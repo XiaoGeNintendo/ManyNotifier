@@ -8,3 +8,6 @@ HRBUST=.+
 ZOJ=.+
 URAL=.+
 LUOGU=.+
+ReduceDebug=true
+DoNotGetFocus=true
+Interval=10

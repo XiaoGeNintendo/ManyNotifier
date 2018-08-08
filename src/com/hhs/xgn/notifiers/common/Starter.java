@@ -32,6 +32,8 @@ public class Starter {
 
 	public static Map<String,String> config=new HashMap<String,String>();
 	public static int interval=1000;
+	public static boolean reduceDebug=false;
+	public static boolean doNotGetFocus=false;
 	
 	/**
 	 * Load a single config file.<br>
@@ -39,14 +41,20 @@ public class Starter {
 	 * @param path Path of the file
 	 */
 	private static void loadConfigFile(){
+		
 		try{
-			File f=new File("user.txt");
+			File f=new File("config.txt");
+			
+			if(!f.exists()) {
+				System.out.println("[STARTER][ERROR]config file not found");
+				System.exit(0);
+			}
 			
 			BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(f)));
 			String s;
 			
-			String fg=f.getName();
-			System.out.println("Read config file:"+fg);
+			String fname=f.getName();
+			System.out.println("[Starter]Read config file:"+fname);
 			
 			for(int i=0;(s=br.readLine())!=null;i++){
 				String[] s2=s.split("=");
@@ -76,7 +84,7 @@ public class Starter {
 		System.out.println("[STARTER]Good luck in the life of OI! =) ---from Zzzyt");
 		System.out.println("===============Program Started===============");
 		
-		System.out.println("[STARTER]Reading config files");
+		System.out.println("[STARTER]Reading config file");
 		loadConfigFile();
 		
 		if(config.containsKey("Interval")) {
@@ -86,6 +94,55 @@ public class Starter {
 				System.out.println("[STARTER]Interval is set to default(1000)");
 				interval=1000;
 			}
+			else {
+				System.out.println("[STARTER]Interval is set to "+interval);
+			}
+		}
+		else {
+			System.out.println("[STARTER]Interval is set to default(1000)");
+			interval=1000;
+		}
+		
+		if(config.containsKey("ReduceDebug")) {
+			String tmp=config.get("ReduceDebug");
+			if(tmp.toLowerCase().equals("true")) {
+				System.out.println("[STARTER]Reduce debug:true");
+				reduceDebug=true;
+			}
+			else if(tmp.toLowerCase().equals("false")) {
+				System.out.println("[STARTER]Reduce debug:false");
+				reduceDebug=false;
+			}
+			else {
+				System.out.println("[STARTER][WARNING]Reduce debug config is wrong:"+tmp);
+				System.out.println("[STARTER]Reduce debug is set to dafault:false");
+				reduceDebug=false;
+			}
+		}
+		else {
+			System.out.println("[STARTER]Reduce debug is set to dafault:false");
+			reduceDebug=false;
+		}
+		
+		if(config.containsKey("DoNotGetFocus")) {
+			String tmp=config.get("DoNotGetFocus");
+			if(tmp.toLowerCase().equals("true")) {
+				System.out.println("[STARTER]Do not get focus:true");
+				doNotGetFocus=true;
+			}
+			else if(tmp.toLowerCase().equals("false")) {
+				System.out.println("[STARTER]Do not get focus:false");
+				doNotGetFocus=false;
+			}
+			else {
+				System.out.println("[STARTER][WARNING]Do not get focus config is wrong:"+tmp);
+				System.out.println("[STARTER]Do not get focus is set to dafault:false");
+				doNotGetFocus=false;
+			}
+		}
+		else {
+			System.out.println("[STARTER]Do not get focus is set to dafault:false");
+			doNotGetFocus=false;
 		}
 		
 		if(config.containsKey("Codeforces")){

@@ -38,7 +38,7 @@ public class DialogQueue {
 			for (int i = 0; i < mv.size(); i++) {
 				MovingWindow tmp = mv.get(i);
 				tmp.update();
-				System.out.println("[QUEUE]Updating window id=" + i+"(Window inside id="+(i+1)+")");
+				if(!Starter.reduceDebug)System.out.println("[QUEUE]Updating window id=" + i+"(Window inside id="+(i+1)+")");
 
 				// Remove outdated windows
 				if (tmp.sta.getText().equals("OOS")) {
@@ -60,12 +60,12 @@ public class DialogQueue {
 	 */
 	@Deprecated
 	public synchronized static void del(int id) {
-		System.out.println("[QUEUE]Removed window id=" + id);
 		mv.get(id).dispose();
 		mv.remove(id - 1);
 		for (int i = 0; i < mv.size(); i++) {
 			mv.get(i).setId(i + 1);
 		}
+		if(!Starter.reduceDebug)System.out.println("[QUEUE]Removed window id=" + id);
 	}
 
 	/**
@@ -82,6 +82,6 @@ public class DialogQueue {
 			mv.get(i).setId(i + 1);
 		}
 
-		System.out.println("[QUEUE]Removed window " + obj);
+		if(!Starter.reduceDebug)System.out.println("[QUEUE]Removed window " + obj);
 	}
 }

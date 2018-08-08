@@ -73,7 +73,7 @@ public class CodeforcesNotifier extends Thread {
 					//All ends clear unused result
 					for(Integer key:mp.keySet()){
 						if(load.contains(key)==false){
-							System.out.println("Clears:"+key);
+							System.out.println("[CF]Clears:"+key);
 							mp.put(key, null);
 						}
 					}
