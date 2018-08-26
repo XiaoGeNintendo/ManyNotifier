@@ -4,7 +4,7 @@ Notice you when a new submission comes!
 You just need to open the application in command line with at least **Java 8** and you can see the submission and details shown in the right-bottom corner of your computer. It will update automatically. You may need to connect to the Internet. 
 # Steps 
 1. Download the code/jar
-    1. If you download the code, open the project in Eclipse and attach all the files in **lib** folder then compile and make it a jar file
+    1. If you download the code, open the project in Eclipse and attach all the files in **lib** folder then compile and make it a jar file.
 2. Create a file called "config.txt" in the same folder as your jar file then turn to <a href="#Configure">Configure config.txt</a>
 3. Run the jar file with the following command: `java -jar <jarname>.jar` with your Internet open
 4. The solution and its information will show in the right
@@ -19,7 +19,6 @@ Interval=[Integer] : Number of milliseconds between two notifier checks. Default
 DoNotGetFocus=[Boolean] : Do not get focus when new window appears. Note that due to some swing feature, if this mode in on you can't see tooltips. Default false.
 
 ReduceDebug=[Boolean] : Reduce debug info. Mainly reduce debug info from DialogQueue. Default false.
-
 
 # Supported Online Judge
 | OJ | Prob# | Sub# | Verdict | Test# | Score | Cnt |
@@ -51,6 +50,9 @@ Cnt - The submissions we update per second
 2. ZOJ and Luogu supports Chinese name. Luogu's display font is changed to support Chinese. But as ZOJ doesn't have much Chinese names, we didn't change the display font, so there may be some error characters.
 3. The score will be displayed at the place of test case
 
+# Working with the source
+Ehh... It is mentioned above. Let me remind you that this is a full Eclipse project, all you need to do is put it in your Eclipse workspace and attach all source jar in the **lib** folder then enjoy.
+
 # Changelog
 - Version 0.7 :Supports **Codeforces** now. Thanks for Mike for the wonderful Codeforces API.
 - Version 1.0 :Supports **Peking University Online Judge(POJ)** now and released on Github
@@ -63,4 +65,4 @@ Cnt - The submissions we update per second
 - Version 1.7 :Deleted some debug information.
 - Version 1.8 :Fixed typo and updates OJ project
 - Version 2.0 :Fixed all bugs. Javadoc added. Supports **Luogu** now! Thanks Zzzyt for his huge help!
-- Version 2.1 :Fixed typo and small changed a little. 
+- Version 2.1 :Fixed typo and added *Working with source* part.
