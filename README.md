@@ -14,7 +14,7 @@ You just need to open the application in command line with at least **Java 8** a
 In each line of **config.txt** you need to input as the following format: `a=b` where `a` means the name of OJ and the `b` means the regex of the username you want to watch of the `a` OJ. For example, if you write `POJ=vjudge1|vjudge2` then only `vjudge1` and `vjudge2`'s solutions on POJ will be shown to you. **The cases of letters does matter**,for example "Poj" doesn't equal "POJ". There is an example in Github.
 
 ## Other Configurations
-Interval=[Integer] : Number of millseconds between two notifier checks. Default 1000.
+Interval=[Integer] : Number of milliseconds between two notifier checks. Default 1000.
 
 DoNotGetFocus=[Boolean] : Do not get focus when new window appears. Note that due to some swing feature, if this mode in on you can't see tooltips. Default false.
 
@@ -22,17 +22,17 @@ ReduceDebug=[Boolean] : Reduce debug info. Mainly reduce debug info from DialogQ
 
 
 # Supported Online Judge
-| OJ | Prob# | Sub# | Verdict | Test# | Cnt |
-| :-: |:-: | :-: | :-: | :-: | :-: |
-|Codeforces|Y|N|Y|Y|10|
-|POJ|Y|Y|Y|N|20|
-|Atcoder(1)|Y|N|Y|Y|20|
-|FZU|Y|Y|Y|N|15|
-|HYSBZ|Y|Y|Y|N|20|
-|HRBUST|Y|Y|Y|N|30|
-|ZOJ(2)|Y|Y|Y|N|15|
-|URAL|Y|N|Y|Y|10|
-|Luogu|Y(2)|Y|Y|N(3)|20|
+| OJ | Prob# | Sub# | Verdict | Test# | Score | Cnt |
+| :-: |:-: | :-: | :-: | :-: | :-: | :-: |
+|Codeforces|Y|N|Y|Y|N|10|
+|POJ|Y|Y|Y|N|N|20|
+|Atcoder(1)|Y|N|Y|Y|N|20|
+|FZU|Y|Y|Y|N|N|15|
+|HYSBZ|Y|Y|Y|N|N|20|
+|HRBUST|Y|Y|Y|N|N|30|
+|ZOJ(2)|Y|Y|Y|N|N|15|
+|URAL|Y|N|Y|Y|N|10|
+|Luogu|Y(2)|Y|Y|N(3)|Y|20|
 
 OJ - The online judge we supported
 
@@ -49,7 +49,7 @@ Cnt - The submissions we update per second
 ## Notice
 1. You need two lines in "user.txt" one is "Atcoder" to specialize the user regex and the other is "AtcoderContest" for the contests you are going to watch. The contest name must be the **short name** of Atcoder contests, for examples AtcoderGrandContest001 should be written as agc001. For example, Atcoder Regular Contest 100's domain is : `https://beta.atcoder.jp/contests/arc100/` then you should input `arc100` which is after `contests`.("AtcoderContest=arc100"). **Atcoder Notifier  doesn't work during contests (will give you 404)** 
 2. ZOJ and Luogu supports Chinese name. Luogu's display font is changed to support Chinese. But as ZOJ doesn't have much Chinese names, we didn't change the display font, so there may be some error characters.
-3. In the place of test case, luogu windows show score (IOI rule).
+3. The score will be displayed at the place of test case
 
 # Changelog
 - Version 0.7 :Supports **Codeforces** now. Thanks for Mike for the wonderful Codeforces API.
@@ -62,6 +62,4 @@ Cnt - The submissions we update per second
 - Version 1.6 :Supports **Timus Online Judge(URAL)** now!
 - Version 1.7 :Deleted some debug information.
 - Version 1.8 :Fixed typo and updates OJ project
-
-
 - Version 2.0 :Fixed all bugs. Javadoc added. Supports **Luogu** now!
