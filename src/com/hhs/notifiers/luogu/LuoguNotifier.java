@@ -8,69 +8,77 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import com.hhs.notifiers.common.DialogQueue;
+import com.hhs.notifiers.common.Starter;
 import com.hhs.notifiers.common.WebPageSource;
-import com.hhs.notifiers.poj.POJWindow;
+import com.hhs.notifiers.luogu.LuoguWindow;
 
 /**
- * Luogu Submission Notifier Main Hasn't finished!
- * @author XGN
+ * Luogu Submission Notifier main thread. Grab status information from URAL and
+ * create {@link LuoguWindow}.
+ * 
+ * @author XGN,Zzzyt
  *
  */
 public class LuoguNotifier extends Thread {
-	String regex;
-	public LuoguNotifier(String string) {
-		regex=string;
-		System.out.println("[LUOGU]start with regex="+string);
+	String reg;
+
+	/**
+	 * Constructor.
+	 * 
+	 * @param regex
+	 *            Regex
+	 */
+	public LuoguNotifier(String regex) {
+		reg = regex;
+		System.out.println("[LUOGU]start with regex=" + regex);
 	}
-	
-	Map<Integer,LuoguSubmission> mp=new HashMap<Integer,LuoguSubmission>();
-	Set<Integer> load=new HashSet<Integer>();
-	
-	public void run(){
-		while(true){
-			try{
-				Thread.sleep(1000);
-				
+
+	Map<Integer, LuoguSubmission> mp = new HashMap<Integer, LuoguSubmission>();
+	Set<Integer> load = new HashSet<Integer>();
+
+	/**
+	 * Run the thread.
+	 */
+	public void run() {
+		while (true) {
+			try {
+				Thread.sleep(Starter.interval);
+
 				load.clear();
-				
+
 				System.out.println("[LUOGU]Checking Luogu Status Page");
-				
-				String s=WebPageSource.get("https://www.luogu.org/recordnew/lists?uid=&pid=&status=&sort=undefined");
-				
-				
-				Document d=Jsoup.parse(s);
-				Elements sub=d.body().getElementsByClass("lg-content-table-left").get(0).getElementsByClass("am-g lg-table-bg0 lg-table-row");
-				
-				//System.out.println(tbody);
-				//System.out.println(tbody);
-				
-				
-				for(Element e:sub){
-					LuoguSubmission ps=new LuoguSubmission(e);
-					System.out.println(ps.verdict+" "+ps.score);
-				}	
-//					if(ps.User.matches(regex)){
-//						if(!ps.equals(mp.get(ps.RunID))){
-//							System.out.println("Change "+ps.RunID);
-//							mp.put(ps.RunID,ps);
-//							DialogQueue.add(new LuoguWindow(ps.RunID,this));
-//							
-//						}
-//						load.add(ps.RunID);
-//					}
-//				
-//				System.out.println(mp.keySet());
-//				System.out.println(load);
-				
-				//Clear mp
-				for(Integer t:mp.keySet()){
-					if(!load.contains(t)){
-						System.out.println("Clears:"+t);
-						mp.put(t,null);	
+
+				// Grab web source
+				String s = WebPageSource.get("https://www.luogu.org/recordnew/lists?uid=&pid=&status=&sort=undefined");
+
+				Document d = Jsoup.parse(s);
+				Elements sub = d.body().getElementsByClass("lg-content-table-left").get(0)
+						.getElementsByClass("am-g lg-table-bg0 lg-table-row");
+
+				// Add
+				for (Element e : sub) {
+					LuoguSubmission ps = new LuoguSubmission(e);
+
+					if (ps.author.matches(reg)) {
+						if (!ps.equals(mp.get(ps.runID))) {
+							System.out.println("[LUOGU]Changed:" + ps.runID);
+							mp.put(ps.runID, ps);
+							DialogQueue.add(new LuoguWindow(ps.runID, this));
+
+						}
+						load.add(ps.runID);
 					}
 				}
-				
-			}catch(Exception e){
+
+				// Clear unused status result
+				for (Integer t : mp.keySet()) {
+					if (!load.contains(t)) {
+						System.out.println("[LUOGU]Cleared:" + t);
+						mp.put(t, null);
+					}
+				}
+
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

@@ -43,6 +43,7 @@ public class WebPageSource {
 			while ((line = reader.readLine()) != null) {
 				ss += line + "\n";
 			}
+			ss=htmlReplace(ss);
 			return ss;
 		} else {
 			throw new Exception("Bad response Code:" + responsecode);

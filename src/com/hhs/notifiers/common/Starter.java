@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import com.hhs.notifiers.atcoder.AtcoderNotifier;
 import com.hhs.notifiers.codeforces.CodeforcesNotifier;
 import com.hhs.notifiers.fzu.FZUNotifier;
@@ -137,9 +135,10 @@ public class Starter {
 			Thread t = new URALNotifier(config.get("URAL"));
 			t.start();
 		}
-		// if(config.containsKey("LUOGU")){
-		// JOptionPane.showMessageDialog(null, "Luogu Supporting hasn't finished!");
-		// }
+		 if(config.containsKey("LUOGU")){
+			 Thread t = new LuoguNotifier(config.get("LUOGU"));
+			 t.start();
+		 }
 
 		DialogQueue.run();
 	}

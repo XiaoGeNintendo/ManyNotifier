@@ -1,31 +1,20 @@
 package com.hhs.notifiers.luogu;
 
-
 import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.net.URI;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import com.hhs.notifiers.common.DialogQueue;
 import com.hhs.notifiers.common.MovingWindow;
 
+/**
+ * Window Class of URAL.
+ * 
+ * @author XGN,Zzzyt
+ *
+ */
 public class LuoguWindow extends MovingWindow {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	int subId;
 
 	int bci;
@@ -33,111 +22,67 @@ public class LuoguWindow extends MovingWindow {
 
 	LuoguWindow self = this;
 
-	JLabel user, pid, sta, tc,sid;
-
 	LuoguNotifier cn;
-	
-	@Override
-	public void setId(int nid) {
-		this.id=nid;
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(this.getGraphicsConfiguration());
-		int x = (int) (dim.getWidth() - 320 - 3);
-		int y = (int) (dim.getHeight() - screenInsets.bottom - 30 * id - 3);
-		this.setBounds(x, y, 320, 30);
-		
+
+	/**
+	 * Constructor with content.
+	 * 
+	 * @param subId
+	 *            Submission ID
+	 * @param cn
+	 *            Its manager {@link LuoguNotifier} object
+	 */
+	public LuoguWindow(int subId, LuoguNotifier cn) {
+		super(" ", " ", " ", " ", "Luogu", "Luogu");
+
+		this.subId = subId;
+
+		this.cn = cn;
+
+		this.user.setFont(new Font("ËÎÌו", Font.BOLD, 15));
+
+		update();
 	}
-	public LuoguWindow(int subId,LuoguNotifier cn) {
-		this.subId=subId;
-		
-		this.cn=cn;
-		
-		this.setTitle("Moving Window");
-		this.setLayout(new GridLayout(1, 5));
-		this.setAlwaysOnTop(true);
-		getRootPane().setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.gray));
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		user = new JLabel("XiaoGeNintendo");
-		pid = new JLabel("1000");
-		sta = new JLabel("Compiling...");
-		tc=new JLabel("Test#0");
-		sid=new JLabel("OJ:URAL");
-		sid.setToolTipText("Timus Online Judge");
-		
-		user.setFont(new Font("Consolas", Font.BOLD, 15));
-		pid.setFont(new Font("Consolas", Font.PLAIN, 15));
-		sid.setFont(new Font("Consolas", Font.PLAIN, 10));
-		sta.setFont(new Font("Consolas", Font.PLAIN, 15));
-		tc.setFont(new Font("Consolas", Font.PLAIN, 15));
 
-		this.add(user);
-		add(pid);
-		add(sta);
-		add(tc);
-		add(sid);
-		this.setVisible(true);
-
-		Thread t = new Thread() {
-			public void run() {
-				while (true) {
-					update();
-					if (sta.getText().equals("WJ") == false && sta.getText().equals("??") == false) {
-						break;
-					}
-
-					try {
-						Thread.sleep(1000);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-
-				try {
-					Thread.sleep(5000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-				dispose();
-				DialogQueue.del(self);
-			}
-		};
-
-		t.start();
-	}
-	
+	/**
+	 * Update contents of this window.
+	 */
 	@Override
 	public void update() {
 		LuoguSubmission f = cn.mp.get(subId);
-		//System.out.println("Getting " + subId + " from " + f);
+
 		if (f == null) {
 			user.setText("??");
 			pid.setText("??");
-			sid.setText("??");
-			//tc.setText("??");
+			tc.setText("??");
 			sta.setText("OOS");
 			sta.setToolTipText("Out of sync");
+			cn.mp.remove(subId);
 			return;
 		}
-//		user.setText(f.User);
-//		user.setToolTipText(f.User);
-//		
-//		pid.setText(""+f.PID);
-//		pid.setToolTipText("ProbID:"+pid.getText());
-//		
-//		if(f.TestNo.equals("")){
-//			tc.setText("");
-//			tc.setToolTipText("(No test case)");
-//		}else{
-//			tc.setText("Test#"+f.TestNo);
-//			tc.setToolTipText("Test#:"+sid.getText());
-//		}
-//		
-//		
-//		StatusCheck(f.Result);
+		user.setText(f.author);
+		user.setToolTipText(f.author);
+
+		pid.setText("" + f.probId.split(" ")[0]);
+		pid.setToolTipText("ProbID:" + pid.getText());
+
+		if (f.score.equals("")) {
+			tc.setText("");
+			tc.setToolTipText("(No score)");
+		} else {
+			tc.setText("" + f.score);
+			tc.setToolTipText("Score:" + tc.getText());
+		}
+
+		StatusCheck(f.verdict);
 	}
 
+	/**
+	 * Set status text format.
+	 * 
+	 * @param v
+	 *            Status string
+	 */
 	void StatusCheck(String v) {
 		sta.setToolTipText(v);
 		if (v.equals("Accepted")) {
@@ -145,41 +90,27 @@ public class LuoguWindow extends MovingWindow {
 			sta.setForeground(Color.GREEN);
 			return;
 		}
-		if(v.equals("Runtime error")){
-			sta.setText("RE");
-			sta.setForeground(Color.CYAN);
-		}
-		if (v.equals("Wrong answer")) {
-			sta.setText("WA");
+		if (v.equals("Unaccepted")) {
+			sta.setText("UA");
 			sta.setForeground(Color.red);
 			return;
 		}
-		if (v.equals("Time limit exceeded")) {
-			sta.setText("TLE");
-			sta.setForeground(Color.blue);
-			return;
-		}
-		if (v.equals("Memory limit exceeded")) {
-			sta.setText("MLE");
-			sta.setForeground(Color.orange);
-			return;
-		}
-		if (v.equals("Output limit exceeded")) {
-			sta.setText("OLE");
-			sta.setForeground(Color.magenta);
-			return;
-		}
-		if (v.equals("Running")) {
+		if (v.equals("Judging")) {
 			sta.setText("WJ");
 			sta.setForeground(Color.black);
 			return;
 		}
-		if(v.equals("Presentation error")){
-			sta.setText("PE");
-			sta.setForeground(Color.pink);
+		if (v.equals("Waiting")) {
+			sta.setText("WJ");
+			sta.setForeground(Color.black);
 			return;
 		}
-		
+		if (v.equals("Compile err")) {
+			sta.setText("CE");
+			sta.setForeground(Color.gray);
+			return;
+		}
+
 		sta.setText(v);
 		sta.setToolTipText(v);
 
