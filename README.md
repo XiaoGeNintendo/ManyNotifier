@@ -62,4 +62,5 @@ Cnt - The submissions we update per second
 - Version 1.6 :Supports **Timus Online Judge(URAL)** now!
 - Version 1.7 :Deleted some debug information.
 - Version 1.8 :Fixed typo and updates OJ project
-- Version 2.0 :Fixed all bugs. Javadoc added. Supports **Luogu** now!
+- Version 2.0 :Fixed all bugs. Javadoc added. Supports **Luogu** now! Thanks Zzzyt for his huge help!
+- Version 2.1 :Fixed typo and small changed a little. 
