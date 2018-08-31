@@ -34,8 +34,10 @@ public class DialogQueue {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			System.out.println("[QUEUE]Updating");
+			
+			if(!Starter.reduceDebug){
+				System.out.println("[QUEUE]Updating");
+			}
 			
 			for (int i = 0; i < mv.size(); i++) {
 				MovingWindow tmp = mv.get(i);
