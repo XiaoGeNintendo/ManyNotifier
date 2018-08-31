@@ -67,3 +67,4 @@ Ehh... It is mentioned above. Let me remind you that this is a full Eclipse proj
 - Version 2.0 :Fixed all bugs. Javadoc added. Supports **Luogu** now! Thanks Zzzyt for his huge help!
 - Version 2.1 :Fixed typo and added *Working with source* part.
 - Version 2.2 :You can now disable `[QUEUE]Updating` by turning on the ReduceDebug option. And fixed the bug that Atcoder notifier doesn't work well with interval.
+- Version 2.3 :Small fix, doesn't matter :P mostly typo fixed
