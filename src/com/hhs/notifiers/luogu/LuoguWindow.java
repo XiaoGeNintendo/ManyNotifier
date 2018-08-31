@@ -6,7 +6,7 @@ import java.awt.Font;
 import com.hhs.notifiers.common.MovingWindow;
 
 /**
- * Window Class of URAL.
+ * Window Class of Luogu.
  * 
  * @author XGN,Zzzyt
  *
@@ -39,7 +39,7 @@ public class LuoguWindow extends MovingWindow {
 
 		this.cn = cn;
 
-		this.user.setFont(new Font("ËÎÌå", Font.BOLD, 15));
+		this.user.setFont(new Font("Ã‹ÃŽÃŒÃ¥", Font.BOLD, 15));
 
 		update();
 	}
