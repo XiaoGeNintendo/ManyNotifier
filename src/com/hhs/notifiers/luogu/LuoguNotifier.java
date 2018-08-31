@@ -13,7 +13,7 @@ import com.hhs.notifiers.common.WebPageSource;
 import com.hhs.notifiers.luogu.LuoguWindow;
 
 /**
- * Luogu Submission Notifier main thread. Grab status information from URAL and
+ * Luogu Submission Notifier main thread. Grab status information from Luogu and
  * create {@link LuoguWindow}.
  * 
  * @author XGN,Zzzyt
