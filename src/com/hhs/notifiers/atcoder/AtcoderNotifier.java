@@ -44,7 +44,7 @@ public class AtcoderNotifier extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(Starter.interval);
 
 				System.out.println("[ATCODER]Atcoder Notifier grabbing");
 
