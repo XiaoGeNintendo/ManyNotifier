@@ -10,6 +10,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import com.hhs.notifiers.common.DialogQueue;
+import com.hhs.notifiers.common.Starter;
 import com.hhs.notifiers.common.WebPageSource;
 
 /**
